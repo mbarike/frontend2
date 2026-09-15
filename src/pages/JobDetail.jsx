@@ -20,7 +20,7 @@ const JobDetail = () => {
         // ===============================
 
         const jobRes = await axios.get(
-          `http://localhost:3000/api/jobs/${id}`
+          `https://backend-emmt.onrender.com/api/jobs/${id}`
         );
 
         setJob(jobRes.data);
@@ -32,7 +32,7 @@ const JobDetail = () => {
         if (role === "candidat" && token) {
           try {
             const applicationsRes = await axios.get(
-              "http://localhost:3000/api/applications/mes-demandes",
+              "https://backend-emmt.onrender.com/api/applications/mes-demandes",
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

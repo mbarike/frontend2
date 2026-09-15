@@ -21,8 +21,7 @@ const Home = () => {
 
   const [loadingStats, setLoadingStats] = useState(true);
 
- const URL = import.meta.env.VITE_API_URL;
-
+const URL = "https://backend-emmt.onrender.com";
   // ===============================
   // RÉCUPÉRER LES OFFRES
   // ===============================

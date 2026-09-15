@@ -45,7 +45,7 @@ const CreateJob = () => {
       setLoading(true);
 
       await axios.post(
-        "http://localhost:3000/api/jobs",
+        "https://backend-emmt.onrender.com/api/jobs",
         {
           titre,
           description,

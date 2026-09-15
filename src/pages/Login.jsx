@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 
-const API = "http://localhost:3000";
+const API = "https://backend-emmt.onrender.com";
 
 
 export default function Login() {

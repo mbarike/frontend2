@@ -14,7 +14,7 @@ const MyApplications = () => {
 
     axios
       .get(
-        "http://localhost:3000/api/applications/mes-demandes",
+        "https://backend-emmt.onrender.com/api/applications/mes-demandes",
         {
           headers: {
             Authorization: `Bearer ${token}`

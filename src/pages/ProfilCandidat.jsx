@@ -11,7 +11,7 @@ const ProfilCandidat = () => {
 
   const [candidat, setCandidat] = useState(null);
 
-  const URL = "http://localhost:3000";
+  const URL = "https://backend-emmt.onrender.com";
 
 
   // ===============================

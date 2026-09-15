@@ -7,7 +7,7 @@ const CreateJobRequest = () => {
 
   const navigate = useNavigate();
 
-  const URL = "http://localhost:3000";
+  const URL = "https://backend-emmt.onrender.com";
   const token = localStorage.getItem("token");
 
   const [posteRecherche, setPosteRecherche] = useState("");

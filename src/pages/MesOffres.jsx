@@ -21,7 +21,7 @@ const MesOffres = () => {
     try {
 
       const res = await axios.get(
-        "http://localhost:3000/api/jobs/mes-offres",
+        "https://backend-emmt.onrender.com/api/jobs/mes-offres",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -168,7 +168,7 @@ const MesOffres = () => {
                 try {
 
                   await axios.delete(
-                    `http://localhost:3000/api/jobs/${id}`,
+                    `https://backend-emmt.onrender.com/api/jobs/${id}`,
                     {
                       headers: {
                         Authorization: `Bearer ${token}`

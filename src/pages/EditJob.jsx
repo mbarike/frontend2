@@ -30,7 +30,7 @@ const EditJob = () => {
       try {
 
         const res = await axios.get(
-          `http://localhost:3000/api/jobs/${id}`
+          `https://backend-emmt.onrender.com/api/jobs/${id}`
         );
 
         setJob({
@@ -93,7 +93,7 @@ const EditJob = () => {
       const token = localStorage.getItem("token");
 
       await axios.put(
-        `http://localhost:3000/api/jobs/${id}`,
+        `https://backend-emmt.onrender.com/api/jobs/${id}`,
         {
           ...job,
           competences: job.competences

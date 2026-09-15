@@ -47,7 +47,7 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/users/admin/users",
+        "https://backend-emmt.onrender.com/api/users/admin/users",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ const AdminDashboard = () => {
   const fetchJobs = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/jobs/admin/all",
+        "https://backend-emmt.onrender.com/api/jobs/admin/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -105,7 +105,7 @@ const AdminDashboard = () => {
   const fetchApplicationsCount = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/applications/admin/count",
+        "https://backend-emmt.onrender.com/api/applications/admin/count",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
   const fetchJobRequestsCount = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/job-requests/admin/count",
+        "https://backend-emmt.onrender.com/api/job-requests/admin/count",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -155,7 +155,7 @@ const AdminDashboard = () => {
   const fetchJobRequests = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/job-requests/admin/all",
+        "https://backend-emmt.onrender.com/api/job-requests/admin/all",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -186,7 +186,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.delete(
-        `http://localhost:3000/api/users/admin/users/${id}`,
+        `https://backend-emmt.onrender.com/api/users/admin/users/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -221,7 +221,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.delete(
-        `http://localhost:3000/api/jobs/admin/${id}`,
+        `https://backend-emmt.onrender.com/api/jobs/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -258,7 +258,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.delete(
-        `http://localhost:3000/api/job-requests/admin/${id}`,
+        `https://backend-emmt.onrender.com/api/job-requests/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

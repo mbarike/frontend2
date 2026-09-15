@@ -26,7 +26,7 @@ const Navbar = () => {
 
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/users/profil",
+          "https://backend-emmt.onrender.com/api/users/profil",
           {
             headers: {
               Authorization: `Bearer ${token}`,

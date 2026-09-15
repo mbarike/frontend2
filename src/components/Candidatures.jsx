@@ -13,7 +13,7 @@ const Candidatures = ({ offreId }) => {
     try {
 
       const res = await axios.get(
-        `http://localhost:3000/api/applications/offre/${offreId}`,
+        `https://backend-emmt.onrender.com/api/applications/offre/${offreId}`,
         {
           headers:{
             Authorization:`Bearer ${token}`
@@ -39,7 +39,7 @@ const Candidatures = ({ offreId }) => {
     try {
 
       await axios.put(
-        `http://localhost:3000/api/applications/${id}/statut`,
+        `https://backend-emmt.onrender.com/api/applications/${id}/statut`,
         {
           statut
         },

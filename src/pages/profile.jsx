@@ -29,7 +29,7 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
 
-  const URL = "http://localhost:3000";
+  const URL = "https://backend-emmt.onrender.com";
 
 
   // ===============================

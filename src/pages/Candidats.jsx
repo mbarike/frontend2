@@ -17,7 +17,7 @@ const Candidats = () => {
   const fetchCandidats = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/applications/offre/${id}`,
+        `https://backend-emmt.onrender.com/api/applications/offre/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const Candidats = () => {
   ) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/applications/${candidatureId}/statut`,
+        `https://backend-emmt.onrender.com/api/applications/${candidatureId}/statut`,
         {
           statut,
         },

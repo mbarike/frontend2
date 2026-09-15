@@ -28,7 +28,7 @@ const ApplyJob = () => {
     try {
 
       await axios.post(
-        "http://localhost:3000/api/applications",
+        "https://backend-emmt.onrender.com/api/applications",
         {
           offre: id,
           message
