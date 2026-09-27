@@ -72,7 +72,6 @@ const AdminDashboard = () => {
 
   const [editingId, setEditingId] = useState(null);
 
-  // Confirmation de suppression personnalisée
   const [confirmDelete, setConfirmDelete] = useState({
     open: false,
     type: null,
@@ -354,7 +353,8 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error(error);
       toast.error(
-        error.response?.data?.message || "Erreur lors du chargement des utilisateurs"
+        error.response?.data?.message ||
+          "Erreur lors du chargement des utilisateurs"
       );
     } finally {
       setLoading(false);
@@ -380,7 +380,8 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error(error);
       toast.error(
-        error.response?.data?.message || "Erreur lors du chargement des offres"
+        error.response?.data?.message ||
+          "Erreur lors du chargement des offres"
       );
     }
   };
@@ -1142,10 +1143,7 @@ const AdminDashboard = () => {
   // BOUTON ACTION
   // =========================
 
-  const ActionButtons = ({
-    onEdit,
-    onDelete,
-  }) => (
+  const ActionButtons = ({ onEdit, onDelete }) => (
     <div className="flex items-center justify-end gap-2">
       <button
         type="button"
@@ -1173,8 +1171,8 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-100 flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 px-8 py-7 flex flex-col items-center">
+      <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 px-6 sm:px-8 py-7 flex flex-col items-center text-center">
           <div className="text-blue-600 mb-3">
             <Icons.Loader size={30} />
           </div>
@@ -1192,23 +1190,24 @@ const AdminDashboard = () => {
   // =========================
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-100 overflow-x-hidden">
       <div className="flex min-h-screen">
 
         {/* =====================================================
             SIDEBAR
         ====================================================== */}
 
-        <aside className="w-64 bg-slate-950 text-white flex flex-col fixed left-0 top-0 bottom-0 z-30">
+        <aside className="w-[72px] lg:w-64 bg-slate-950 text-white flex flex-col fixed left-0 top-0 bottom-0 z-30 transition-all">
 
           {/* LOGO */}
-          <div className="px-6 py-6 border-b border-slate-800">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-blue-600 flex items-center justify-center">
+          <div className="px-3 lg:px-6 py-5 lg:py-6 border-b border-slate-800">
+            <div className="flex items-center justify-center lg:justify-start gap-3">
+
+              <div className="w-11 h-11 flex-shrink-0 rounded-xl bg-blue-600 flex items-center justify-center">
                 <Icons.Shield size={24} />
               </div>
 
-              <div>
+              <div className="hidden lg:block">
                 <div className="text-xl font-bold tracking-tight">
                   <span className="text-blue-400">Job</span>
                   <span className="text-white">Connect</span>
@@ -1218,12 +1217,13 @@ const AdminDashboard = () => {
                   Administration
                 </p>
               </div>
+
             </div>
           </div>
 
           {/* MENU */}
-          <div className="px-4 py-6 flex-1">
-            <p className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold px-3 mb-3">
+          <div className="px-2 lg:px-4 py-6 flex-1">
+            <p className="hidden lg:block text-[11px] uppercase tracking-wider text-slate-500 font-semibold px-3 mb-3">
               Menu principal
             </p>
 
@@ -1237,7 +1237,8 @@ const AdminDashboard = () => {
                     key={item.id}
                     type="button"
                     onClick={() => setCurrentView(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition ${
+                    title={item.label}
+                    className={`w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-3 rounded-xl text-sm font-medium transition ${
                       active
                         ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20"
                         : "text-slate-300 hover:bg-slate-800 hover:text-white"
@@ -1245,11 +1246,13 @@ const AdminDashboard = () => {
                   >
                     <Icon size={19} />
 
-                    <span>{item.label}</span>
+                    <span className="hidden lg:block">
+                      {item.label}
+                    </span>
 
                     {item.id === "candidates" && (
                       <span
-                        className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                        className={`hidden lg:inline ml-auto text-xs px-2 py-0.5 rounded-full ${
                           active
                             ? "bg-blue-500 text-white"
                             : "bg-slate-800 text-slate-400"
@@ -1261,7 +1264,7 @@ const AdminDashboard = () => {
 
                     {item.id === "recruiters" && (
                       <span
-                        className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                        className={`hidden lg:inline ml-auto text-xs px-2 py-0.5 rounded-full ${
                           active
                             ? "bg-blue-500 text-white"
                             : "bg-slate-800 text-slate-400"
@@ -1273,7 +1276,7 @@ const AdminDashboard = () => {
 
                     {item.id === "jobs" && (
                       <span
-                        className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                        className={`hidden lg:inline ml-auto text-xs px-2 py-0.5 rounded-full ${
                           active
                             ? "bg-blue-500 text-white"
                             : "bg-slate-800 text-slate-400"
@@ -1285,7 +1288,7 @@ const AdminDashboard = () => {
 
                     {item.id === "requests" && (
                       <span
-                        className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                        className={`hidden lg:inline ml-auto text-xs px-2 py-0.5 rounded-full ${
                           active
                             ? "bg-blue-500 text-white"
                             : "bg-slate-800 text-slate-400"
@@ -1301,9 +1304,9 @@ const AdminDashboard = () => {
           </div>
 
           {/* ADMIN + DECONNEXION */}
-          <div className="p-4 border-t border-slate-800">
+          <div className="p-2 lg:p-4 border-t border-slate-800">
 
-            <div className="bg-slate-900 rounded-xl p-3 mb-3">
+            <div className="hidden lg:block bg-slate-900 rounded-xl p-3 mb-3">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center">
                   <Icons.Shield size={18} />
@@ -1324,10 +1327,13 @@ const AdminDashboard = () => {
             <button
               type="button"
               onClick={deconnexionAdmin}
-              className="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-red-500/10 hover:text-red-400 transition"
+              title="Déconnexion"
+              className="w-full flex items-center justify-center lg:justify-start gap-3 px-3 py-3 rounded-xl text-sm font-medium text-slate-300 hover:bg-red-500/10 hover:text-red-400 transition"
             >
               <Icons.Logout size={19} />
-              <span>Déconnexion</span>
+              <span className="hidden lg:block">
+                Déconnexion
+              </span>
             </button>
           </div>
         </aside>
@@ -1336,18 +1342,18 @@ const AdminDashboard = () => {
             CONTENU PRINCIPAL
         ====================================================== */}
 
-        <main className="ml-64 flex-1 min-w-0">
+        <main className="ml-[72px] lg:ml-64 flex-1 min-w-0">
 
           {/* HEADER */}
           <header className="bg-white border-b border-slate-200 sticky top-0 z-20">
-            <div className="px-8 py-5 flex items-center justify-between">
+            <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between gap-4">
 
-              <div>
-                <p className="text-sm text-slate-500">
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-slate-500">
                   Administration
                 </p>
 
-                <h1 className="text-2xl font-bold text-slate-900 mt-0.5">
+                <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5 truncate">
                   {currentView === "dashboard" &&
                     "Tableau de bord"}
 
@@ -1365,7 +1371,7 @@ const AdminDashboard = () => {
                 </h1>
               </div>
 
-              <div className="hidden sm:flex items-center gap-3">
+              <div className="hidden sm:flex items-center gap-3 flex-shrink-0">
                 <div className="w-9 h-9 rounded-full bg-green-50 text-green-600 flex items-center justify-center">
                   <span className="w-2.5 h-2.5 bg-green-500 rounded-full" />
                 </div>
@@ -1374,6 +1380,7 @@ const AdminDashboard = () => {
                   <p className="text-sm font-semibold text-slate-700">
                     Système actif
                   </p>
+
                   <p className="text-xs text-slate-400">
                     Administration
                   </p>
@@ -1382,7 +1389,7 @@ const AdminDashboard = () => {
             </div>
           </header>
 
-          <div className="p-8">
+          <div className="p-4 sm:p-6 lg:p-8">
 
             {/* =================================================
                 DASHBOARD
@@ -1392,16 +1399,16 @@ const AdminDashboard = () => {
               <div className="space-y-7">
 
                 {/* BIENVENUE */}
-                <section className="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+                <section className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-7">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
-                    <div>
+                    <div className="min-w-0">
                       <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold mb-4">
                         <Icons.Shield size={14} />
                         Espace administrateur
                       </div>
 
-                      <h2 className="text-2xl font-bold text-slate-900">
+                      <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
                         Bienvenue dans votre espace d'administration
                       </h2>
 
@@ -1411,7 +1418,7 @@ const AdminDashboard = () => {
                       </p>
                     </div>
 
-                    <div className="hidden lg:flex w-20 h-20 rounded-2xl bg-blue-50 text-blue-600 items-center justify-center">
+                    <div className="hidden lg:flex w-20 h-20 flex-shrink-0 rounded-2xl bg-blue-50 text-blue-600 items-center justify-center">
                       <Icons.Shield size={38} />
                     </div>
                   </div>
@@ -1425,9 +1432,9 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setCurrentView("candidates")}
-                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-blue-200 hover:shadow-md transition group"
+                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:border-blue-200 hover:shadow-md transition group"
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-sm font-medium text-slate-500">
                             Candidats
@@ -1438,7 +1445,7 @@ const AdminDashboard = () => {
                           </p>
                         </div>
 
-                        <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition">
+                        <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition">
                           <Icons.Users size={24} />
                         </div>
                       </div>
@@ -1452,9 +1459,9 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setCurrentView("recruiters")}
-                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-emerald-200 hover:shadow-md transition group"
+                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:border-emerald-200 hover:shadow-md transition group"
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-sm font-medium text-slate-500">
                             Recruteurs
@@ -1465,7 +1472,7 @@ const AdminDashboard = () => {
                           </p>
                         </div>
 
-                        <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition">
                           <Icons.Briefcase size={24} />
                         </div>
                       </div>
@@ -1479,9 +1486,9 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setCurrentView("jobs")}
-                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-violet-200 hover:shadow-md transition group"
+                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:border-violet-200 hover:shadow-md transition group"
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-sm font-medium text-slate-500">
                             Offres d'emploi
@@ -1492,7 +1499,7 @@ const AdminDashboard = () => {
                           </p>
                         </div>
 
-                        <div className="w-12 h-12 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center group-hover:bg-violet-600 group-hover:text-white transition">
+                        <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center group-hover:bg-violet-600 group-hover:text-white transition">
                           <Icons.FileText size={24} />
                         </div>
                       </div>
@@ -1506,9 +1513,9 @@ const AdminDashboard = () => {
                     <button
                       type="button"
                       onClick={() => setCurrentView("requests")}
-                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:border-amber-200 hover:shadow-md transition group"
+                      className="text-left bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 hover:border-amber-200 hover:shadow-md transition group"
                     >
-                      <div className="flex items-start justify-between">
+                      <div className="flex items-start justify-between gap-3">
                         <div>
                           <p className="text-sm font-medium text-slate-500">
                             Demandes d'emploi
@@ -1519,7 +1526,7 @@ const AdminDashboard = () => {
                           </p>
                         </div>
 
-                        <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition">
+                        <div className="w-12 h-12 flex-shrink-0 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center group-hover:bg-amber-600 group-hover:text-white transition">
                           <Icons.Clipboard size={24} />
                         </div>
                       </div>
@@ -1532,7 +1539,7 @@ const AdminDashboard = () => {
                 </section>
 
                 {/* ACCES RAPIDES */}
-                <section className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <section className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
                   <div className="mb-5">
                     <h3 className="text-lg font-bold text-slate-900">
                       Accès rapides
@@ -1550,14 +1557,15 @@ const AdminDashboard = () => {
                       onClick={ouvrirAjoutCandidat}
                       className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                      <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                         <Icons.Plus />
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-semibold text-slate-800 text-sm">
                           Ajouter un candidat
                         </p>
+
                         <p className="text-xs text-slate-400 mt-0.5">
                           Créer un compte candidat
                         </p>
@@ -1569,14 +1577,15 @@ const AdminDashboard = () => {
                       onClick={ouvrirAjoutRecruteur}
                       className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/50 transition text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                      <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
                         <Icons.Plus />
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-semibold text-slate-800 text-sm">
                           Ajouter un recruteur
                         </p>
+
                         <p className="text-xs text-slate-400 mt-0.5">
                           Créer un compte recruteur
                         </p>
@@ -1588,14 +1597,15 @@ const AdminDashboard = () => {
                       onClick={ouvrirAjoutOffre}
                       className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-violet-300 hover:bg-violet-50/50 transition text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center">
+                      <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-violet-50 text-violet-600 flex items-center justify-center">
                         <Icons.Plus />
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-semibold text-slate-800 text-sm">
                           Ajouter une offre
                         </p>
+
                         <p className="text-xs text-slate-400 mt-0.5">
                           Publier une nouvelle offre
                         </p>
@@ -1607,20 +1617,20 @@ const AdminDashboard = () => {
                       onClick={ouvrirAjoutDemande}
                       className="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 transition text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                      <div className="w-10 h-10 flex-shrink-0 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
                         <Icons.Plus />
                       </div>
 
-                      <div>
+                      <div className="min-w-0">
                         <p className="font-semibold text-slate-800 text-sm">
                           Ajouter une demande
                         </p>
+
                         <p className="text-xs text-slate-400 mt-0.5">
                           Créer une demande d'emploi
                         </p>
                       </div>
                     </button>
-
                   </div>
                 </section>
               </div>
@@ -1632,10 +1642,9 @@ const AdminDashboard = () => {
 
             {currentView === "candidates" && (
               <div className="space-y-5">
-
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-                  <div className="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                     <div>
                       <h2 className="font-bold text-slate-900">
@@ -1648,8 +1657,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-
-                      <div className="relative">
+                      <div className="relative flex-1 sm:flex-none">
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
                           <Icons.Search size={18} />
                         </div>
@@ -1683,23 +1691,18 @@ const AdminDashboard = () => {
                           <th className="px-5 py-4 font-semibold">
                             Candidat
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Email
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Téléphone
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Localisation
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Date
                           </th>
-
                           <th className="px-5 py-4 font-semibold text-right">
                             Actions
                           </th>
@@ -1715,13 +1718,9 @@ const AdminDashboard = () => {
                             >
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
-                                  <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
-                                    {(
-                                      user.prenom?.charAt(0) || ""
-                                    ).toUpperCase()}
-                                    {(
-                                      user.nom?.charAt(0) || ""
-                                    ).toUpperCase()}
+                                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm">
+                                    {(user.prenom?.charAt(0) || "").toUpperCase()}
+                                    {(user.nom?.charAt(0) || "").toUpperCase()}
                                   </div>
 
                                   <div>
@@ -1796,10 +1795,9 @@ const AdminDashboard = () => {
 
             {currentView === "recruiters" && (
               <div className="space-y-5">
-
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-                  <div className="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                     <div>
                       <h2 className="font-bold text-slate-900">
@@ -1812,8 +1810,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-
-                      <div className="relative">
+                      <div className="relative flex-1 sm:flex-none">
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
                           <Icons.Search size={18} />
                         </div>
@@ -1847,23 +1844,18 @@ const AdminDashboard = () => {
                           <th className="px-5 py-4 font-semibold">
                             Recruteur
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Email
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Entreprise
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Secteur
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Localisation
                           </th>
-
                           <th className="px-5 py-4 font-semibold text-right">
                             Actions
                           </th>
@@ -1879,13 +1871,9 @@ const AdminDashboard = () => {
                             >
                               <td className="px-5 py-4">
                                 <div className="flex items-center gap-3">
-                                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm">
-                                    {(
-                                      user.prenom?.charAt(0) || ""
-                                    ).toUpperCase()}
-                                    {(
-                                      user.nom?.charAt(0) || ""
-                                    ).toUpperCase()}
+                                  <div className="w-10 h-10 flex-shrink-0 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm">
+                                    {(user.prenom?.charAt(0) || "").toUpperCase()}
+                                    {(user.nom?.charAt(0) || "").toUpperCase()}
                                   </div>
 
                                   <div>
@@ -1960,10 +1948,9 @@ const AdminDashboard = () => {
 
             {currentView === "jobs" && (
               <div className="space-y-5">
-
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-                  <div className="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                     <div>
                       <h2 className="font-bold text-slate-900">
@@ -1976,8 +1963,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-
-                      <div className="relative">
+                      <div className="relative flex-1 sm:flex-none">
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
                           <Icons.Search size={18} />
                         </div>
@@ -2011,23 +1997,18 @@ const AdminDashboard = () => {
                           <th className="px-5 py-4 font-semibold">
                             Offre
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Recruteur
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Localisation
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Compétences
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Date
                           </th>
-
                           <th className="px-5 py-4 font-semibold text-right">
                             Actions
                           </th>
@@ -2144,10 +2125,9 @@ const AdminDashboard = () => {
 
             {currentView === "requests" && (
               <div className="space-y-5">
-
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
 
-                  <div className="p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                  <div className="p-4 sm:p-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                     <div>
                       <h2 className="font-bold text-slate-900">
@@ -2160,8 +2140,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-3">
-
-                      <div className="relative">
+                      <div className="relative flex-1 sm:flex-none">
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
                           <Icons.Search size={18} />
                         </div>
@@ -2195,27 +2174,21 @@ const AdminDashboard = () => {
                           <th className="px-5 py-4 font-semibold">
                             Candidat
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Poste recherché
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Localisation
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Contrat
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Statut
                           </th>
-
                           <th className="px-5 py-4 font-semibold">
                             Date
                           </th>
-
                           <th className="px-5 py-4 font-semibold text-right">
                             Actions
                           </th>
@@ -2280,9 +2253,7 @@ const AdminDashboard = () => {
                               <td className="px-5 py-4">
                                 <ActionButtons
                                   onEdit={() =>
-                                    ouvrirModificationDemande(
-                                      request
-                                    )
+                                    ouvrirModificationDemande(request)
                                   }
                                   onDelete={() =>
                                     demanderSuppression(
@@ -2324,13 +2295,14 @@ const AdminDashboard = () => {
       ======================================================== */}
 
       {modalType === "user" && (
-        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
 
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] overflow-hidden">
 
-            <div className="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">
+            <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200 flex items-center justify-between gap-3">
+
+              <div className="min-w-0">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                   {editingId
                     ? "Modifier l'utilisateur"
                     : userForm.role === "candidat"
@@ -2346,7 +2318,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                className="p-2 flex-shrink-0 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
               >
                 <Icons.X />
               </button>
@@ -2354,7 +2326,7 @@ const AdminDashboard = () => {
 
             <form
               onSubmit={enregistrerUtilisateur}
-              className="p-6 overflow-y-auto max-h-[calc(90vh-150px)]"
+              className="p-4 sm:p-6 overflow-y-auto max-h-[calc(92vh-145px)]"
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
@@ -2574,7 +2546,7 @@ const AdminDashboard = () => {
                 )}
               </div>
 
-              <div className="flex justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={closeModal}
@@ -2586,7 +2558,7 @@ const AdminDashboard = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center justify-center gap-2"
                 >
                   {saving && <Icons.Loader size={17} />}
                   {editingId ? "Enregistrer" : "Ajouter"}
@@ -2602,13 +2574,14 @@ const AdminDashboard = () => {
       ======================================================== */}
 
       {modalType === "job" && (
-        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
 
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] overflow-hidden">
 
-            <div className="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">
+            <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200 flex items-center justify-between gap-3">
+
+              <div className="min-w-0">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                   {editingId
                     ? "Modifier l'offre"
                     : "Ajouter une offre"}
@@ -2622,7 +2595,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                className="p-2 flex-shrink-0 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
               >
                 <Icons.X />
               </button>
@@ -2630,7 +2603,7 @@ const AdminDashboard = () => {
 
             <form
               onSubmit={enregistrerOffre}
-              className="p-6 overflow-y-auto max-h-[calc(90vh-150px)]"
+              className="p-4 sm:p-6 overflow-y-auto max-h-[calc(92vh-145px)]"
             >
               <div className="space-y-5">
 
@@ -2745,7 +2718,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={closeModal}
@@ -2757,7 +2730,7 @@ const AdminDashboard = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center justify-center gap-2"
                 >
                   {saving && <Icons.Loader size={17} />}
                   {editingId ? "Enregistrer" : "Ajouter"}
@@ -2773,13 +2746,14 @@ const AdminDashboard = () => {
       ======================================================== */}
 
       {modalType === "request" && (
-        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
 
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[92vh] overflow-hidden">
 
-            <div className="px-6 py-5 border-b border-slate-200 flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold text-slate-900">
+            <div className="px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200 flex items-center justify-between gap-3">
+
+              <div className="min-w-0">
+                <h2 className="text-lg sm:text-xl font-bold text-slate-900">
                   {editingId
                     ? "Modifier la demande"
                     : "Ajouter une demande"}
@@ -2793,7 +2767,7 @@ const AdminDashboard = () => {
               <button
                 type="button"
                 onClick={closeModal}
-                className="p-2 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                className="p-2 flex-shrink-0 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
               >
                 <Icons.X />
               </button>
@@ -2801,7 +2775,7 @@ const AdminDashboard = () => {
 
             <form
               onSubmit={enregistrerDemande}
-              className="p-6 overflow-y-auto max-h-[calc(90vh-150px)]"
+              className="p-4 sm:p-6 overflow-y-auto max-h-[calc(92vh-145px)]"
             >
               <div className="space-y-5">
 
@@ -2958,7 +2932,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-7 pt-5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={closeModal}
@@ -2970,7 +2944,7 @@ const AdminDashboard = () => {
                 <button
                   type="submit"
                   disabled={saving}
-                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition disabled:opacity-60 flex items-center justify-center gap-2"
                 >
                   {saving && <Icons.Loader size={17} />}
                   {editingId ? "Enregistrer" : "Ajouter"}
@@ -2982,30 +2956,30 @@ const AdminDashboard = () => {
       )}
 
       {/* =======================================================
-          CONFIRMATION SUPPRESSION PERSONNALISÉE
+          CONFIRMATION SUPPRESSION
       ======================================================== */}
 
       {confirmDelete.open && (
-        <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
 
           <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
 
-            <div className="p-6">
+            <div className="p-5 sm:p-6">
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-3 sm:gap-4">
 
-                <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 flex-shrink-0 rounded-full bg-red-50 text-red-600 flex items-center justify-center">
                   <Icons.Trash size={22} />
                 </div>
 
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h2 className="text-lg font-bold text-slate-900">
                     Confirmer la suppression
                   </h2>
 
                   <p className="text-sm text-slate-500 mt-2 leading-relaxed">
                     Voulez-vous vraiment supprimer{" "}
-                    <span className="font-semibold text-slate-700">
+                    <span className="font-semibold text-slate-700 break-words">
                       {confirmDelete.label}
                     </span>
                     {" "}?
@@ -3019,13 +2993,13 @@ const AdminDashboard = () => {
                 <button
                   type="button"
                   onClick={annulerSuppression}
-                  className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition"
+                  className="p-1.5 flex-shrink-0 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition"
                 >
                   <Icons.X size={18} />
                 </button>
               </div>
 
-              <div className="flex justify-end gap-3 mt-7">
+              <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 mt-7">
 
                 <button
                   type="button"
@@ -3053,3 +3027,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
