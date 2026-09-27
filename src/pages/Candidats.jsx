@@ -25,7 +25,7 @@ const Candidats = () => {
         }
       );
 
-      console.log("CANDIDATURES :", res.data);
+     console.log("CANDIDATURES :", JSON.stringify(res.data, null, 2));
 
       setCandidats(res.data);
     } catch (error) {

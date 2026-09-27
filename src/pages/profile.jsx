@@ -29,7 +29,38 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
 
-  const URL = "https://backend-emmt.onrender.com";
+ const URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+// ===============================
+// CORRIGER LES URL DES FICHIERS
+// ===============================
+const getFileUrl = (fileUrl) => {
+  if (!fileUrl) return "";
+
+  // Ancienne URL locale
+  if (fileUrl.startsWith("http://localhost:3000")) {
+    return fileUrl.replace(
+      "http://localhost:3000",
+      URL
+    );
+  }
+
+  // URL locale avec 127.0.0.1
+  if (fileUrl.startsWith("http://127.0.0.1:3000")) {
+    return fileUrl.replace(
+      "http://127.0.0.1:3000",
+      URL
+    );
+  }
+
+  // Chemin relatif /uploads/...
+  if (fileUrl.startsWith("/uploads/")) {
+    return `${URL}${fileUrl}`;
+  }
+
+  // URL déjà complète
+  return fileUrl;
+};
 
 
   // ===============================
@@ -54,7 +85,7 @@ const Profile = () => {
       setPrenom(u.prenom || "");
       setNom(u.nom || "");
       setEmail(u.email || "");
-      setPhoto(u.photo || "");
+     setPhoto(getFileUrl(u.photo));
       setRole(u.role || "candidat");
 
       setTelephone(u.telephone || "");
@@ -71,7 +102,7 @@ const Profile = () => {
       setEntreprise(u.entreprise || "");
       setSecteur(u.secteur || "");
 
-      setCv(u.cv || "");
+     setCv(getFileUrl(u.cv));
 
     } catch (error) {
 
@@ -899,7 +930,9 @@ const Profile = () => {
                             }
                           );
 
-                          setPhoto(res.data.url);
+                         const photoUrl = res.data.url || res.data.photo;
+
+setPhoto(getFileUrl(photoUrl));
 
                           toast.success(
                             "Photo uploadée avec succès ✅"
@@ -1505,7 +1538,7 @@ const Profile = () => {
                           }
                         );
 
-                        setCv(res.data.url);
+                       setCv(getFileUrl(res.data.url));
 
                         toast.success(
                           "CV uploadé avec succès ✅"

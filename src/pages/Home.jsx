@@ -2,26 +2,446 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+/* ==================================================
+   ICÔNES SELON LE MÉTIER
+================================================== */
+
+const CodeIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path d="M8 9l-3 3 3 3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M16 9l3 3-3 3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M14 5l-4 14" strokeLinecap="round" />
+  </svg>
+);
+
+const CarIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M5 17h14l-1-7H6l-1 7Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M7 10l1.5-4h7L17 10" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="8" cy="17" r="1.5" />
+    <circle cx="16" cy="17" r="1.5" />
+    <path d="M5 13h14" strokeLinecap="round" />
+  </svg>
+);
+
+const HealthIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M12 9v6M9 12h6" strokeLinecap="round" />
+  </svg>
+);
+
+const EducationIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path d="M3 9l9-5 9 5-9 5-9-5Z" strokeLinejoin="round" />
+    <path d="M7 11.5V16c2.5 2 7.5 2 10 0v-4.5" strokeLinecap="round" />
+    <path d="M21 10v5" strokeLinecap="round" />
+  </svg>
+);
+
+const MechanicIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M14.5 6.5a4 4 0 0 0-5.1 5.1L4 17l3 3 5.4-5.4a4 4 0 0 0 5.1-5.1l-2.3 2.3-2.7-2.7 2-2.6Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const FinanceIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M8 16v-3M12 16V9M16 16v-5" strokeLinecap="round" />
+  </svg>
+);
+
+const ConstructionIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path d="M3 20h18" strokeLinecap="round" />
+    <path d="M5 20V10l7-5 7 5v10" strokeLinejoin="round" />
+    <path d="M9 20v-5h6v5" strokeLinejoin="round" />
+    <path d="M8 10h8" strokeLinecap="round" />
+  </svg>
+);
+
+const ChefIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M7 10a4 4 0 0 1 1-7 4 4 0 0 1 4 2 4 4 0 0 1 4-2 4 4 0 0 1 1 7"
+      strokeLinecap="round"
+    />
+    <path d="M6 10h12v3H6z" strokeLinejoin="round" />
+    <path d="M8 13v7h8v-7" strokeLinejoin="round" />
+    <path d="M10 16h4" strokeLinecap="round" />
+  </svg>
+);
+
+const ShoppingIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M5 8h14l-1 11H6L5 8Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M9 8a3 3 0 0 1 6 0" strokeLinecap="round" />
+    <path d="M9 12h6" strokeLinecap="round" />
+  </svg>
+);
+
+const DesignIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M4 17.5V20h2.5L18 8.5 15.5 6 4 17.5Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M14 7.5L16.5 10" strokeLinecap="round" />
+    <path d="M19 5l.5.5M20 8h1M17 3v-1" strokeLinecap="round" />
+  </svg>
+);
+
+const MarketingIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M4 12h4l9-5v10l-9-5H4v5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M20 9a5 5 0 0 1 0 6" strokeLinecap="round" />
+  </svg>
+);
+
+const TruckIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <circle cx="7" cy="18" r="1.5" />
+    <circle cx="18" cy="18" r="1.5" />
+  </svg>
+);
+
+const ElectricalIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M13 2L5 13h6l-1 9 8-11h-6l1-9Z"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const CameraIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M8 7l1.5-3h5L16 7" strokeLinecap="round" />
+    <circle cx="12" cy="13.5" r="3.5" />
+  </svg>
+);
+
+const HomeIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <path
+      d="M3 11.5L12 4l9 7.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path d="M5 10v10h14V10" strokeLinejoin="round" />
+    <path d="M9 20v-5h6v5" strokeLinejoin="round" />
+  </svg>
+);
+
+const BriefcaseIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    className="w-7 h-7"
+  >
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    <path d="M3 12h18" strokeLinecap="round" />
+    <path d="M10 12v2h4v-2" strokeLinecap="round" />
+  </svg>
+);
+
+/* ==================================================
+   CHOISIR L'ICÔNE SELON LE TITRE DU POSTE
+================================================== */
+
+const getMetierIcon = (titre = "") => {
+  const texte = titre.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  if (
+    texte.includes("developpeur") ||
+    texte.includes("developer") ||
+    texte.includes("informatique") ||
+    texte.includes("programm") ||
+    texte.includes("full stack") ||
+    texte.includes("frontend") ||
+    texte.includes("backend") ||
+    texte.includes("logiciel") ||
+    texte.includes("software") ||
+    texte.includes("data") ||
+    texte.includes("cyber") ||
+    texte.includes("reseau")
+  ) {
+    return <CodeIcon />;
+  }
+
+  if (
+    texte.includes("chauffeur") ||
+    texte.includes("conducteur") ||
+    texte.includes("taxi") ||
+    texte.includes("transport")
+  ) {
+    return <CarIcon />;
+  }
+
+  if (
+    texte.includes("medecin") ||
+    texte.includes("infirmier") ||
+    texte.includes("pharmac") ||
+    texte.includes("dentiste") ||
+    texte.includes("sage-femme") ||
+    texte.includes("sante")
+  ) {
+    return <HealthIcon />;
+  }
+
+  if (
+    texte.includes("enseignant") ||
+    texte.includes("professeur") ||
+    texte.includes("formateur") ||
+    texte.includes("educateur") ||
+    texte.includes("education") ||
+    texte.includes("instituteur") ||
+    texte.includes("enseignante")
+  ) {
+    return <EducationIcon />;
+  }
+
+  if (
+    texte.includes("mecanicien") ||
+    texte.includes("mecanique") ||
+    texte.includes("garage")
+  ) {
+    return <MechanicIcon />;
+  }
+
+  if (
+    texte.includes("comptable") ||
+    texte.includes("comptabilite") ||
+    texte.includes("finance") ||
+    texte.includes("financier") ||
+    texte.includes("banque") ||
+    texte.includes("banquier") ||
+    texte.includes("auditeur")
+  ) {
+    return <FinanceIcon />;
+  }
+
+  if (
+    texte.includes("macon") ||
+    texte.includes("construction") ||
+    texte.includes("batiment") ||
+    texte.includes("architecte") ||
+    texte.includes("ingenieur") ||
+    texte.includes("chantier") ||
+    texte.includes("plombier")
+  ) {
+    return <ConstructionIcon />;
+  }
+
+  if (
+    texte.includes("cuisinier") ||
+    texte.includes("cuisine") ||
+    texte.includes("chef cuisinier") ||
+    texte.includes("patissier") ||
+    texte.includes("restaurant") ||
+    texte.includes("serveur")
+  ) {
+    return <ChefIcon />;
+  }
+
+  if (
+    texte.includes("vendeur") ||
+    texte.includes("commercial") ||
+    texte.includes("commerce") ||
+    texte.includes("caissier") ||
+    texte.includes("boutique") ||
+    texte.includes("vente")
+  ) {
+    return <ShoppingIcon />;
+  }
+
+  if (
+    texte.includes("designer") ||
+    texte.includes("graphiste") ||
+    texte.includes("design") ||
+    texte.includes("ux") ||
+    texte.includes("ui")
+  ) {
+    return <DesignIcon />;
+  }
+
+  if (
+    texte.includes("marketing") ||
+    texte.includes("communication") ||
+    texte.includes("community manager") ||
+    texte.includes("publicite") ||
+    texte.includes("reseaux sociaux")
+  ) {
+    return <MarketingIcon />;
+  }
+
+  if (
+    texte.includes("livreur") ||
+    texte.includes("livraison") ||
+    texte.includes("logistique") ||
+    texte.includes("transporteur") ||
+    texte.includes("magasinier")
+  ) {
+    return <TruckIcon />;
+  }
+
+  if (
+    texte.includes("electricien") ||
+    texte.includes("electricite")
+  ) {
+    return <ElectricalIcon />;
+  }
+
+  if (
+    texte.includes("photographe") ||
+    texte.includes("photographie") ||
+    texte.includes("photo") ||
+    texte.includes("videaste")
+  ) {
+    return <CameraIcon />;
+  }
+
+  if (
+    texte.includes("immobilier") ||
+    texte.includes("agent immobilier") ||
+    texte.includes("immobiliere")
+  ) {
+    return <HomeIcon />;
+  }
+
+  return <BriefcaseIcon />;
+};
+
 const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState("");
   const [localisation, setLocalisation] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // ===============================
-  // 📊 STATISTIQUES
-  // ===============================
+  const URL = "https://backend-emmt.onrender.com";
 
-  const [stats, setStats] = useState({
-    totalUsers: 0,
-    candidats: 0,
-    recruteurs: 0,
-    offres: 0,
-  });
-
-  const [loadingStats, setLoadingStats] = useState(true);
-
-const URL = "https://backend-emmt.onrender.com";
   // ===============================
   // RÉCUPÉRER LES OFFRES
   // ===============================
@@ -54,40 +474,11 @@ const URL = "https://backend-emmt.onrender.com";
   };
 
   // ===============================
-  // 📊 RÉCUPÉRER LES STATISTIQUES
-  // ===============================
-
-  const fetchStats = async () => {
-    try {
-      setLoadingStats(true);
-
-      const [usersRes, jobsRes] = await Promise.all([
-        axios.get(`${URL}/api/users/stats/public`),
-        axios.get(`${URL}/api/jobs`),
-      ]);
-
-      setStats({
-        totalUsers: usersRes.data.totalUsers || 0,
-        candidats: usersRes.data.candidats || 0,
-        recruteurs: usersRes.data.recruteurs || 0,
-        offres: Array.isArray(jobsRes.data)
-          ? jobsRes.data.length
-          : 0,
-      });
-    } catch (error) {
-      console.log("Erreur statistiques :", error);
-    } finally {
-      setLoadingStats(false);
-    }
-  };
-
-  // ===============================
   // CHARGEMENT INITIAL
   // ===============================
 
   useEffect(() => {
     fetchJobs();
-    fetchStats();
   }, []);
 
   // ===============================
@@ -110,46 +501,22 @@ const URL = "https://backend-emmt.onrender.com";
       {/* HERO */}
       {/* ================================================== */}
 
-      <section
-        className="
-          relative
-          bg-gradient-to-br
-          from-blue-800
-          via-blue-700
-          to-blue-500
-          text-white
-          overflow-hidden
-        "
-      >
-
-        {/* FORMES DÉCORATIVES */}
+      <section className="relative text-white overflow-hidden bg-blue-900">
 
         <div
           className="
             absolute
-            -top-32
-            -right-32
-            w-96
-            h-96
-            bg-white/10
-            rounded-full
+            inset-0
+            bg-cover
+            bg-[center_25%]
+            bg-no-repeat
           "
+          style={{
+            backgroundImage: "url('/hero-job.jpg')",
+          }}
         ></div>
 
-        <div
-          className="
-            absolute
-            -bottom-40
-            -left-32
-            w-96
-            h-96
-            bg-white/10
-            rounded-full
-          "
-        ></div>
-
-
-        {/* CONTENU HERO */}
+        <div className="absolute inset-0 bg-slate-950/65"></div>
 
         <div
           className="
@@ -159,50 +526,34 @@ const URL = "https://backend-emmt.onrender.com";
             px-4
             sm:px-6
             lg:px-8
-            pt-12
-            md:pt-16
-            pb-28
-            md:pb-32
+            py-16
+            md:py-20
           "
         >
-
           <div
             className="
               grid
               grid-cols-1
               lg:grid-cols-2
               gap-10
-              lg:gap-14
+              lg:gap-16
               items-center
             "
           >
 
-            {/* ================================================== */}
-            {/* TEXTE À GAUCHE */}
-            {/* ================================================== */}
-
             <div className="text-center lg:text-left">
 
-              <div
+              <p
                 className="
-                  inline-flex
-                  items-center
-                  gap-2
-                  bg-white/10
-                  border
-                  border-white/20
-                  backdrop-blur-sm
-                  px-5
-                  py-2.5
-                  rounded-full
                   text-sm
+                  sm:text-base
                   font-semibold
-                  mb-6
+                  text-blue-100
+                  mb-5
                 "
               >
-                💼 Votre carrière commence ici
-              </div>
-
+                Plateforme de mise en relation professionnelle
+              </p>
 
               <h1
                 className="
@@ -216,20 +567,14 @@ const URL = "https://backend-emmt.onrender.com";
               >
                 Trouvez votre
                 <br />
-
                 <span className="text-white">
                   prochain emploi
                 </span>
-
-                <span className="ml-2">
-                  🚀
-                </span>
               </h1>
-
 
               <p
                 className="
-                  mt-5
+                  mt-6
                   text-base
                   sm:text-lg
                   text-blue-100
@@ -239,190 +584,73 @@ const URL = "https://backend-emmt.onrender.com";
                   leading-relaxed
                 "
               >
-                Découvrez les meilleures opportunités et
-                connectez-vous directement avec les recruteurs.
+                JobConnect met en relation les candidats
+                à la recherche d'une opportunité et les
+                recruteurs à la recherche de nouveaux profils.
               </p>
 
-
-              {/* PETITS BADGES */}
-
               <div
                 className="
+                  mt-8
                   flex
-                  flex-wrap
+                  flex-col
+                  sm:flex-row
+                  gap-3
                   justify-center
                   lg:justify-start
-                  gap-3
-                  mt-7
                 "
               >
 
-                <div
+                <a
+                  href="#offres"
                   className="
-                    flex
-                    items-center
-                    gap-2
-                    bg-white/10
-                    border
-                    border-white/20
-                    px-4
-                    py-2
-                    rounded-full
-                    text-sm
-                  "
-                >
-                  ✓ Offres disponibles
-                </div>
-
-                <div
-                  className="
-                    flex
-                    items-center
-                    gap-2
-                    bg-white/10
-                    border
-                    border-white/20
-                    px-4
-                    py-2
-                    rounded-full
-                    text-sm
-                  "
-                >
-                  ✓ Recruteurs vérifiés
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* ================================================== */}
-            {/* IMAGE À DROITE */}
-            {/* ================================================== */}
-
-            <div
-              className="
-                relative
-                w-full
-                max-w-xl
-                mx-auto
-                lg:ml-auto
-              "
-            >
-
-              {/* Halo derrière l'image */}
-
-              <div
-                className="
-                  absolute
-                  -inset-3
-                  bg-white/10
-                  rounded-[2rem]
-                  rotate-2
-                "
-              ></div>
-
-
-              {/* IMAGE */}
-
-              <div
-                className="
-                  relative
-                  overflow-hidden
-                  rounded-[2rem]
-                  border
-                  border-white/20
-                  shadow-2xl
-                  bg-blue-900
-                "
-              >
-
-                <img
-                  src="/hero-job.jpg"
-                  alt="Professionnelle dans son environnement de travail"
-                  className="
-                    w-full
-                    h-[300px]
-                    sm:h-[360px]
-                    lg:h-[390px]
-                    object-cover
-                    object-right
-                  "
-                />
-
-                {/* Dégradé léger */}
-
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-blue-900/30
-                    via-transparent
-                    to-transparent
-                  "
-                ></div>
-
-              </div>
-
-
-              {/* CARTE FLOTTANTE */}
-
-              <div
-                className="
-                  absolute
-                  -bottom-5
-                  left-4
-                  sm:left-8
-                  bg-white
-                  text-gray-800
-                  rounded-2xl
-                  shadow-2xl
-                  px-4
-                  py-3
-                  flex
-                  items-center
-                  gap-3
-                "
-              >
-
-                <div
-                  className="
-                    w-10
-                    h-10
-                    bg-blue-100
-                    rounded-xl
-                    flex
+                    inline-flex
                     items-center
                     justify-center
-                    text-xl
+                    px-6
+                    py-3.5
+                    rounded-xl
+                    bg-white
+                    text-blue-700
+                    font-bold
+                    hover:bg-blue-50
+                    transition
+                    shadow-lg
                   "
                 >
-                  💼
-                </div>
+                  Consulter les offres
+                </a>
 
-                <div>
-
-                  <p className="text-xs text-gray-400">
-                    JobConnect
-                  </p>
-
-                  <p className="text-sm font-bold text-gray-800">
-                    Construisez votre avenir
-                  </p>
-
-                </div>
+                <Link
+                  to="/register"
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    px-6
+                    py-3.5
+                    rounded-xl
+                    border
+                    border-white
+                    text-white
+                    font-bold
+                    hover:bg-white
+                    hover:text-blue-700
+                    transition
+                  "
+                >
+                  Créer un compte
+                </Link>
 
               </div>
 
             </div>
 
+            <div className="hidden lg:block"></div>
+
           </div>
-
         </div>
-
       </section>
-
 
       {/* ================================================== */}
       {/* RECHERCHE */}
@@ -435,16 +663,14 @@ const URL = "https://backend-emmt.onrender.com";
           mx-auto
           px-4
           sm:px-6
-          -mt-12
-          md:-mt-14
+          -mt-8
+          md:-mt-10
         "
       >
-
         <div
           className="
             bg-white
             rounded-2xl
-            md:rounded-3xl
             shadow-xl
             border
             border-gray-100
@@ -453,42 +679,19 @@ const URL = "https://backend-emmt.onrender.com";
           "
         >
 
-          <div
-            className="
-              flex
-              flex-col
-              lg:flex-row
-              gap-3
-            "
-          >
-
-            {/* RECHERCHE */}
+          <div className="flex flex-col lg:flex-row gap-3">
 
             <div className="relative flex-1">
 
-              <span
-                className="
-                  absolute
-                  left-5
-                  top-1/2
-                  -translate-y-1/2
-                  text-xl
-                "
-              >
-                🔍
-              </span>
-
               <input
                 type="text"
-                placeholder="Rechercher un poste, une compétence..."
+                placeholder="Rechercher un poste ou une compétence"
                 className="
                   w-full
                   border
                   border-gray-200
                   rounded-xl
-                  md:rounded-2xl
-                  pl-13
-                  pr-5
+                  px-5
                   py-4
                   text-gray-700
                   bg-gray-50
@@ -510,22 +713,7 @@ const URL = "https://backend-emmt.onrender.com";
 
             </div>
 
-
-            {/* LOCALISATION */}
-
             <div className="relative lg:w-72">
-
-              <span
-                className="
-                  absolute
-                  left-5
-                  top-1/2
-                  -translate-y-1/2
-                  text-xl
-                "
-              >
-                📍
-              </span>
 
               <input
                 type="text"
@@ -535,9 +723,7 @@ const URL = "https://backend-emmt.onrender.com";
                   border
                   border-gray-200
                   rounded-xl
-                  md:rounded-2xl
-                  pl-13
-                  pr-5
+                  px-5
                   py-4
                   text-gray-700
                   bg-gray-50
@@ -558,9 +744,6 @@ const URL = "https://backend-emmt.onrender.com";
               />
 
             </div>
-
-
-            {/* BOUTONS */}
 
             <div
               className="
@@ -583,18 +766,16 @@ const URL = "https://backend-emmt.onrender.com";
                   px-6
                   py-4
                   rounded-xl
-                  md:rounded-2xl
                   font-bold
                   transition
                   shadow-sm
                   hover:shadow-md
                 "
               >
-                🔍 Rechercher
+                Rechercher
               </button>
 
               {(search || localisation) && (
-
                 <button
                   onClick={resetFilters}
                   className="
@@ -605,27 +786,22 @@ const URL = "https://backend-emmt.onrender.com";
                     px-5
                     py-4
                     rounded-xl
-                    md:rounded-2xl
                     font-semibold
                     transition
                   "
                 >
                   Effacer
                 </button>
-
               )}
 
             </div>
 
           </div>
-
         </div>
-
       </section>
 
-
       {/* ================================================== */}
-      {/* JOBCONNECT EN CHIFFRES */}
+      {/* PRÉSENTATION */}
       {/* ================================================== */}
 
       <section
@@ -634,325 +810,97 @@ const URL = "https://backend-emmt.onrender.com";
           mx-auto
           px-4
           sm:px-6
-          pt-10
-          md:pt-12
+          lg:px-8
+          pt-14
+          md:pt-16
         "
       >
 
-        <div
-          className="
-            bg-white
-            rounded-2xl
-            border
-            border-gray-200
-            shadow-sm
-            overflow-hidden
-          "
-        >
-
-          {/* EN-TÊTE */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           <div
             className="
-              text-center
-              px-4
-              pt-5
-              pb-4
+              bg-white
+              rounded-2xl
+              border
+              border-gray-200
+              p-7
+              shadow-sm
             "
           >
 
-            <div
-              className="
-                inline-flex
-                items-center
-                gap-2
-                bg-blue-50
-                text-blue-600
-                px-3
-                py-1.5
-                rounded-full
-                text-xs
-                font-bold
-                mb-2
-              "
-            >
-              📊 JobConnect
-            </div>
-
-            <h2
-              className="
-                text-xl
-                sm:text-2xl
-                font-extrabold
-                text-gray-800
-              "
-            >
-              JobConnect en chiffres
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+              Vous êtes candidat ?
             </h2>
 
-            <p
+            <p className="mt-3 text-gray-600 leading-relaxed">
+              Consultez les offres disponibles, créez votre
+              profil professionnel, envoyez vos candidatures
+              et gérez vos demandes d'emploi depuis votre espace.
+            </p>
+
+            <Link
+              to="/register"
               className="
-                text-gray-400
-                mt-1
-                text-xs
-                sm:text-sm
+                inline-block
+                mt-5
+                text-blue-600
+                font-bold
+                hover:text-blue-700
+                transition
               "
             >
-              Une plateforme qui connecte candidats et recruteurs.
-            </p>
+              Créer un compte candidat
+            </Link>
 
           </div>
 
-
-          {/* STATISTIQUES */}
-
           <div
             className="
-              grid
-              grid-cols-2
-              lg:grid-cols-4
-              border-t
-              border-gray-100
+              bg-white
+              rounded-2xl
+              border
+              border-gray-200
+              p-7
+              shadow-sm
             "
           >
 
-            {/* UTILISATEURS */}
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900">
+              Vous êtes recruteur ?
+            </h2>
 
-            <div
+            <p className="mt-3 text-gray-600 leading-relaxed">
+              Publiez vos offres d'emploi, présentez votre
+              entreprise et consultez les candidatures reçues
+              depuis votre espace recruteur.
+            </p>
+
+            <Link
+              to="/register"
               className="
-                px-4
-                py-5
-                sm:py-6
-                text-center
-                border-b
-                lg:border-b-0
-                border-r
-                border-gray-100
+                inline-block
+                mt-5
+                text-blue-600
+                font-bold
+                hover:text-blue-700
+                transition
               "
             >
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  bg-blue-100
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-lg
-                  mx-auto
-                  mb-2
-                "
-              >
-                👥
-              </div>
-
-              <p
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-extrabold
-                  text-blue-600
-                "
-              >
-                {loadingStats ? "..." : stats.totalUsers}
-              </p>
-
-              <p
-                className="
-                  text-gray-500
-                  text-xs
-                  sm:text-sm
-                  font-semibold
-                  mt-0.5
-                "
-              >
-                Utilisateurs
-              </p>
-
-            </div>
-
-
-            {/* CANDIDATS */}
-
-            <div
-              className="
-                px-4
-                py-5
-                sm:py-6
-                text-center
-                border-b
-                lg:border-b-0
-                lg:border-r
-                border-gray-100
-              "
-            >
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  bg-green-100
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-lg
-                  mx-auto
-                  mb-2
-                "
-              >
-                👤
-              </div>
-
-              <p
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-extrabold
-                  text-green-600
-                "
-              >
-                {loadingStats ? "..." : stats.candidats}
-              </p>
-
-              <p
-                className="
-                  text-gray-500
-                  text-xs
-                  sm:text-sm
-                  font-semibold
-                  mt-0.5
-                "
-              >
-                Candidats
-              </p>
-
-            </div>
-
-
-            {/* RECRUTEURS */}
-
-            <div
-              className="
-                px-4
-                py-5
-                sm:py-6
-                text-center
-                border-r
-                border-gray-100
-              "
-            >
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  bg-purple-100
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-lg
-                  mx-auto
-                  mb-2
-                "
-              >
-                🏢
-              </div>
-
-              <p
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-extrabold
-                  text-purple-600
-                "
-              >
-                {loadingStats ? "..." : stats.recruteurs}
-              </p>
-
-              <p
-                className="
-                  text-gray-500
-                  text-xs
-                  sm:text-sm
-                  font-semibold
-                  mt-0.5
-                "
-              >
-                Recruteurs
-              </p>
-
-            </div>
-
-
-            {/* OFFRES */}
-
-            <div
-              className="
-                px-4
-                py-5
-                sm:py-6
-                text-center
-              "
-            >
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  bg-orange-100
-                  rounded-xl
-                  flex
-                  items-center
-                  justify-center
-                  text-lg
-                  mx-auto
-                  mb-2
-                "
-              >
-                💼
-              </div>
-
-              <p
-                className="
-                  text-2xl
-                  sm:text-3xl
-                  font-extrabold
-                  text-orange-600
-                "
-              >
-                {loadingStats ? "..." : stats.offres}
-              </p>
-
-              <p
-                className="
-                  text-gray-500
-                  text-xs
-                  sm:text-sm
-                  font-semibold
-                  mt-0.5
-                "
-              >
-                Offres d'emploi
-              </p>
-
-            </div>
+              Créer un compte recruteur
+            </Link>
 
           </div>
 
         </div>
-
       </section>
-
 
       {/* ================================================== */}
       {/* DERNIÈRES OFFRES */}
       {/* ================================================== */}
 
       <section
+        id="offres"
         className="
           w-full
           max-w-[1500px]
@@ -965,8 +913,6 @@ const URL = "https://backend-emmt.onrender.com";
           pb-20
         "
       >
-
-        {/* EN-TÊTE */}
 
         <div
           className="
@@ -982,85 +928,46 @@ const URL = "https://backend-emmt.onrender.com";
 
           <div>
 
-            <div className="flex items-center gap-3">
-
-              <div
-                className="
-                  w-12
-                  h-12
-                  bg-blue-600
-                  rounded-2xl
-                  flex
-                  items-center
-                  justify-center
-                  text-xl
-                  shadow-md
-                  shadow-blue-200
-                "
-              >
-                💼
-              </div>
-
-              <div>
-
-                <div
-                  className="
-                    text-xs
-                    font-bold
-                    uppercase
-                    tracking-widest
-                    text-blue-600
-                    mb-1
-                  "
-                >
-                  Opportunités
-                </div>
-
-                <h2
-                  className="
-                    text-2xl
-                    sm:text-3xl
-                    md:text-4xl
-                    font-extrabold
-                    text-gray-900
-                  "
-                >
-                  Dernières offres
-                </h2>
-
-              </div>
-
-            </div>
-
-            <p
+            <div
               className="
-                text-gray-500
-                mt-3
-                text-sm
-                sm:text-base
-                ml-0
-                sm:ml-15
+                text-xs
+                font-bold
+                uppercase
+                tracking-widest
+                text-blue-600
+                mb-2
               "
             >
-              Découvrez les opportunités disponibles actuellement.
+              Opportunités professionnelles
+            </div>
+
+            <h2
+              className="
+                text-2xl
+                sm:text-3xl
+                md:text-4xl
+                font-extrabold
+                text-gray-900
+              "
+            >
+              Dernières offres
+            </h2>
+
+            <p className="text-gray-500 mt-3 text-sm sm:text-base">
+              Découvrez les offres d'emploi publiées récemment.
             </p>
 
           </div>
 
-
-          {/* COMPTEUR */}
-
           {jobs.length > 0 && (
-
             <div
               className="
                 inline-flex
                 items-center
-                gap-2
                 bg-white
                 border
-                border-blue-100
-                rounded-2xl
+                border-gray-200
+                rounded-xl
                 px-5
                 py-3
                 shadow-sm
@@ -1069,36 +976,23 @@ const URL = "https://backend-emmt.onrender.com";
               "
             >
 
-              <span
-                className="
-                  w-2
-                  h-2
-                  bg-green-500
-                  rounded-full
-                  animate-pulse
-                "
-              ></span>
-
               <span className="text-xl font-extrabold text-blue-600">
                 {jobs.length}
               </span>
 
-              <span className="text-gray-500 text-sm font-medium">
+              <span className="text-gray-500 text-sm font-medium ml-2">
                 offre{jobs.length > 1 ? "s" : ""} disponible
                 {jobs.length > 1 ? "s" : ""}
               </span>
 
             </div>
-
           )}
 
         </div>
 
-
         {/* CHARGEMENT */}
 
         {loading && (
-
           <div
             className="
               bg-white
@@ -1134,14 +1028,11 @@ const URL = "https://backend-emmt.onrender.com";
             </p>
 
           </div>
-
         )}
-
 
         {/* AUCUNE OFFRE */}
 
         {!loading && jobs.length === 0 && (
-
           <div
             className="
               bg-white
@@ -1155,47 +1046,20 @@ const URL = "https://backend-emmt.onrender.com";
             "
           >
 
-            <div
-              className="
-                w-20
-                h-20
-                bg-blue-50
-                rounded-3xl
-                flex
-                items-center
-                justify-center
-                text-4xl
-                mx-auto
-                mb-5
-              "
-            >
-              🔎
-            </div>
-
-            <h3
-              className="
-                text-xl
-                md:text-2xl
-                font-bold
-                text-gray-800
-              "
-            >
+            <h3 className="text-xl md:text-2xl font-bold text-gray-800">
               Aucune offre disponible
             </h3>
 
             <p className="text-gray-500 mt-2">
-              Revenez bientôt pour découvrir de nouvelles opportunités.
+              Revenez bientôt pour découvrir de nouvelles offres.
             </p>
 
           </div>
-
         )}
-
 
         {/* GRILLE DES OFFRES */}
 
         {!loading && jobs.length > 0 && (
-
           <div
             className="
               grid
@@ -1208,7 +1072,6 @@ const URL = "https://backend-emmt.onrender.com";
           >
 
             {jobs.map((job) => (
-
               <article
                 key={job._id}
                 className="
@@ -1219,8 +1082,8 @@ const URL = "https://backend-emmt.onrender.com";
                   border
                   border-gray-200
                   shadow-sm
-                  hover:shadow-2xl
-                  hover:-translate-y-1.5
+                  hover:shadow-xl
+                  hover:-translate-y-1
                   transition-all
                   duration-300
                   overflow-hidden
@@ -1229,19 +1092,9 @@ const URL = "https://backend-emmt.onrender.com";
                 "
               >
 
-                {/* BARRE BLEUE */}
+                {/* BARRE SUPÉRIEURE */}
 
-                <div
-                  className="
-                    h-1.5
-                    w-full
-                    bg-gradient-to-r
-                    from-blue-600
-                    via-blue-500
-                    to-cyan-400
-                  "
-                ></div>
-
+                <div className="h-1.5 w-full bg-blue-600"></div>
 
                 {/* HAUT DE LA CARTE */}
 
@@ -1258,22 +1111,29 @@ const URL = "https://backend-emmt.onrender.com";
 
                     <div className="flex items-start gap-4 min-w-0">
 
+                      {/* ICÔNE DU MÉTIER */}
+
                       <div
                         className="
-                          w-14
-                          h-14
-                          bg-blue-50
-                          group-hover:bg-blue-100
-                          rounded-2xl
                           flex
                           items-center
                           justify-center
-                          text-2xl
+                          w-14
+                          h-14
                           flex-shrink-0
-                          transition
+                          rounded-2xl
+                          bg-blue-50
+                          text-blue-600
+                          border
+                          border-blue-100
+                          group-hover:bg-blue-600
+                          group-hover:text-white
+                          group-hover:border-blue-600
+                          transition-all
+                          duration-300
                         "
                       >
-                        💼
+                        {getMetierIcon(job.titre)}
                       </div>
 
                       <div className="min-w-0">
@@ -1310,13 +1170,10 @@ const URL = "https://backend-emmt.onrender.com";
 
                     </div>
 
-
                     <span
                       className="
                         hidden
                         sm:inline-flex
-                        items-center
-                        gap-1.5
                         bg-green-50
                         text-green-600
                         border
@@ -1329,12 +1186,10 @@ const URL = "https://backend-emmt.onrender.com";
                         whitespace-nowrap
                       "
                     >
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
                       Disponible
                     </span>
 
                   </div>
-
 
                   {/* DESCRIPTION */}
 
@@ -1352,7 +1207,6 @@ const URL = "https://backend-emmt.onrender.com";
                   </p>
 
                 </div>
-
 
                 {/* CONTENU */}
 
@@ -1372,9 +1226,6 @@ const URL = "https://backend-emmt.onrender.com";
 
                   <div
                     className="
-                      flex
-                      items-center
-                      gap-3
                       bg-gray-50
                       border
                       border-gray-100
@@ -1384,170 +1235,118 @@ const URL = "https://backend-emmt.onrender.com";
                     "
                   >
 
-                    <div
+                    <p
                       className="
-                        w-10
-                        h-10
-                        bg-white
-                        rounded-xl
-                        flex
-                        items-center
-                        justify-center
-                        shadow-sm
-                        text-lg
+                        text-[10px]
+                        text-gray-400
+                        font-bold
+                        uppercase
+                        tracking-wider
                       "
                     >
-                      📍
-                    </div>
+                      Localisation
+                    </p>
 
-                    <div>
-
-                      <p
-                        className="
-                          text-[10px]
-                          text-gray-400
-                          font-bold
-                          uppercase
-                          tracking-wider
-                        "
-                      >
-                        Localisation
-                      </p>
-
-                      <p
-                        className="
-                          text-sm
-                          font-semibold
-                          text-gray-700
-                          mt-0.5
-                        "
-                      >
-                        {job.localisation || "Non précisée"}
-                      </p>
-
-                    </div>
+                    <p
+                      className="
+                        text-sm
+                        font-semibold
+                        text-gray-700
+                        mt-1
+                      "
+                    >
+                      {job.localisation || "Non précisée"}
+                    </p>
 
                   </div>
-
 
                   {/* COMPÉTENCES */}
 
                   {job.competences &&
                     job.competences.length > 0 && (
+                      <div className="mt-5">
 
-                    <div className="mt-5">
+                        <p
+                          className="
+                            text-sm
+                            font-bold
+                            text-gray-700
+                            mb-3
+                          "
+                        >
+                          Compétences recherchées
+                        </p>
 
-                      <p
-                        className="
-                          text-sm
-                          font-bold
-                          text-gray-700
-                          mb-3
-                        "
-                      >
-                        🛠️ Compétences recherchées
-                      </p>
+                        <div className="flex flex-wrap gap-2">
 
-                      <div className="flex flex-wrap gap-2">
+                          {Array.isArray(job.competences) ? (
+                            job.competences
+                              .slice(0, 4)
+                              .map((competence, index) => (
+                                <span
+                                  key={index}
+                                  className="
+                                    bg-blue-50
+                                    text-blue-700
+                                    border
+                                    border-blue-100
+                                    text-xs
+                                    font-semibold
+                                    px-3
+                                    py-1.5
+                                    rounded-full
+                                  "
+                                >
+                                  {String(competence).trim()}
+                                </span>
+                              ))
+                          ) : (
+                            <span
+                              className="
+                                bg-blue-50
+                                text-blue-700
+                                border
+                                border-blue-100
+                                text-xs
+                                font-semibold
+                                px-3
+                                py-1.5
+                                rounded-full
+                              "
+                            >
+                              {job.competences}
+                            </span>
+                          )}
 
-                        {Array.isArray(job.competences) ? (
-
-                          job.competences
-                            .slice(0, 4)
-                            .map((competence, index) => (
-
-                              <span
-                                key={index}
-                                className="
-                                  bg-blue-50
-                                  text-blue-700
-                                  border
-                                  border-blue-100
-                                  text-xs
-                                  font-semibold
-                                  px-3
-                                  py-1.5
-                                  rounded-full
-                                  transition
-                                  group-hover:bg-blue-100
-                                "
-                              >
-                                {String(competence).trim()}
-                              </span>
-
-                            ))
-
-                        ) : (
-
-                          <span
-                            className="
-                              bg-blue-50
-                              text-blue-700
-                              border
-                              border-blue-100
-                              text-xs
-                              font-semibold
-                              px-3
-                              py-1.5
-                              rounded-full
-                            "
-                          >
-                            {job.competences}
-                          </span>
-
-                        )}
+                        </div>
 
                       </div>
-
-                    </div>
-
-                  )}
-
+                    )}
 
                   {/* DATE */}
 
-                  <div
-                    className="
-                      mt-5
-                      flex
-                      items-center
-                      gap-2
-                      text-xs
-                      text-gray-400
-                    "
-                  >
+                  <div className="mt-5 text-xs text-gray-400">
 
-                    <span className="text-base">
-                      🕒
-                    </span>
+                    Publiée le{" "}
 
-                    <span>
+                    {job.createdAt
+                      ? new Date(
+                          job.createdAt
+                        ).toLocaleDateString("fr-FR")
+                      : "Date inconnue"}
 
-                      Publiée le{" "}
+                    {" à "}
 
-                      {job.createdAt
-                        ? new Date(
-                            job.createdAt
-                          ).toLocaleDateString("fr-FR")
-                        : "Date inconnue"
-                      }
-
-                      {" à "}
-
-                      {job.createdAt
-                        ? new Date(
-                            job.createdAt
-                          ).toLocaleTimeString("fr-FR", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "--:--"
-                      }
-
-                    </span>
+                    {job.createdAt
+                      ? new Date(
+                          job.createdAt
+                        ).toLocaleTimeString("fr-FR", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })
+                      : "--:--"}
 
                   </div>
-
 
                   {/* BOUTON */}
 
@@ -1567,7 +1366,6 @@ const URL = "https://backend-emmt.onrender.com";
                         flex
                         items-center
                         justify-center
-                        gap-2
                         w-full
                         bg-blue-600
                         hover:bg-blue-700
@@ -1580,19 +1378,7 @@ const URL = "https://backend-emmt.onrender.com";
                         hover:shadow-lg
                       "
                     >
-
                       Voir l'offre
-
-                      <span
-                        className="
-                          group-hover:translate-x-1
-                          transition
-                          text-lg
-                        "
-                      >
-                        →
-                      </span>
-
                     </Link>
 
                   </div>
@@ -1600,11 +1386,9 @@ const URL = "https://backend-emmt.onrender.com";
                 </div>
 
               </article>
-
             ))}
 
           </div>
-
         )}
 
       </section>
@@ -1614,3 +1398,4 @@ const URL = "https://backend-emmt.onrender.com";
 };
 
 export default Home;
+

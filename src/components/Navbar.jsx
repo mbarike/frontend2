@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -36,9 +35,7 @@ const Navbar = () => {
 
         setUser(res.data);
       } catch (error) {
-        console.log(
-          error.response?.data || error.message
-        );
+        console.log(error.response?.data || error.message);
       }
     };
 
@@ -58,7 +55,7 @@ const Navbar = () => {
     setMenuOpen(false);
     setActiveMenu(null);
 
-    toast.success("Déconnexion réussie 👋");
+    toast.success("Déconnexion réussie");
 
     navigate("/login");
   };
@@ -84,19 +81,16 @@ const Navbar = () => {
     emploi: [
       {
         to: "/",
-        icon: "🔎",
         title: "Consulter les offres",
         description: "Découvrir les opportunités disponibles",
       },
       {
         to: "/creer-demande-emploi",
-        icon: "➕",
         title: "Créer une demande",
         description: "Publier votre recherche d'emploi",
       },
       {
         to: "/mes-demandes-emploi",
-        icon: "📄",
         title: "Mes demandes",
         description: "Gérer vos demandes d'emploi",
       },
@@ -105,7 +99,6 @@ const Navbar = () => {
     candidatures: [
       {
         to: "/mes-candidatures",
-        icon: "📋",
         title: "Mes candidatures",
         description: "Consulter et suivre vos candidatures",
       },
@@ -114,19 +107,16 @@ const Navbar = () => {
     recrutement: [
       {
         to: "/create",
-        icon: "➕",
         title: "Créer une offre",
         description: "Publier une nouvelle opportunité",
       },
       {
         to: "/mes-offres",
-        icon: "💼",
         title: "Mes offres",
         description: "Gérer vos offres publiées",
       },
       {
         to: "/demandes-emploi",
-        icon: "👥",
         title: "Demandes d'emploi",
         description: "Consulter les profils des candidats",
       },
@@ -138,20 +128,18 @@ const Navbar = () => {
   // ===============================
 
   const navLink =
-    "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm lg:text-base font-semibold text-white hover:bg-blue-500 transition-all duration-200 whitespace-nowrap";
+    "flex items-center px-4 py-2.5 rounded-xl text-sm lg:text-base font-semibold text-white hover:bg-blue-500 transition-all duration-200 whitespace-nowrap";
 
   const dropdownButton =
-    "flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm lg:text-base font-semibold text-white hover:bg-blue-500 transition-all duration-200 whitespace-nowrap";
+    "flex items-center px-4 py-2.5 rounded-xl text-sm lg:text-base font-semibold text-white hover:bg-blue-500 transition-all duration-200 whitespace-nowrap";
 
   return (
     <nav className="sticky top-0 z-50 bg-blue-600 text-white shadow-lg">
-
       {/* ===============================
           CONTAINER PRINCIPAL
       =============================== */}
 
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-
         <div className="h-[76px] flex items-center justify-between gap-4">
 
           {/* ===============================
@@ -172,11 +160,12 @@ const Navbar = () => {
                 flex
                 items-center
                 justify-center
-                text-2xl
                 shadow-md
               "
             >
-              💼
+              <span className="text-blue-600 font-bold text-lg">
+                JC
+              </span>
             </div>
 
             <div className="hidden sm:block">
@@ -189,7 +178,6 @@ const Navbar = () => {
               </div>
             </div>
           </Link>
-
 
           {/* ===============================
               MENU DESKTOP
@@ -204,10 +192,8 @@ const Navbar = () => {
               onClick={() => setActiveMenu(null)}
               className={navLink}
             >
-              🏠
               <span>Accueil</span>
             </Link>
-
 
             {/* ===============================
                 DASHBOARD ADMIN
@@ -220,7 +206,6 @@ const Navbar = () => {
                 className="
                   flex
                   items-center
-                  gap-2
                   px-4
                   py-2.5
                   rounded-xl
@@ -239,34 +224,20 @@ const Navbar = () => {
                   whitespace-nowrap
                 "
               >
-                🛡️
                 <span>Dashboard Admin</span>
               </Link>
             )}
-
 
             {/* ===============================
                 EMPLOI
             =============================== */}
 
             <div className="relative">
-
               <button
                 onClick={() => toggleMenu("emploi")}
                 className={dropdownButton}
               >
-                🔎
                 <span>Emploi</span>
-
-                <span
-                  className={`text-xs transition-transform duration-200 ${
-                    activeMenu === "emploi"
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                >
-                  ▼
-                </span>
               </button>
 
               {activeMenu === "emploi" && (
@@ -301,18 +272,13 @@ const Navbar = () => {
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        gap-3
+                        block
                         px-5
                         py-4
                         hover:bg-blue-50
                         transition
                       "
                     >
-                      <span className="text-xl">
-                        {item.icon}
-                      </span>
-
                       <div>
                         <p className="font-semibold text-gray-800">
                           {item.title}
@@ -328,29 +294,16 @@ const Navbar = () => {
               )}
             </div>
 
-
             {/* ===============================
                 CANDIDATURES
             =============================== */}
 
             <div className="relative">
-
               <button
                 onClick={() => toggleMenu("candidatures")}
                 className={dropdownButton}
               >
-                📋
                 <span>Candidatures</span>
-
-                <span
-                  className={`text-xs transition-transform duration-200 ${
-                    activeMenu === "candidatures"
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                >
-                  ▼
-                </span>
               </button>
 
               {activeMenu === "candidatures" && (
@@ -385,18 +338,13 @@ const Navbar = () => {
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        gap-3
+                        block
                         px-5
                         py-4
                         hover:bg-blue-50
                         transition
                       "
                     >
-                      <span className="text-xl">
-                        {item.icon}
-                      </span>
-
                       <div>
                         <p className="font-semibold text-gray-800">
                           {item.title}
@@ -412,29 +360,16 @@ const Navbar = () => {
               )}
             </div>
 
-
             {/* ===============================
                 RECRUTEMENT
             =============================== */}
 
             <div className="relative">
-
               <button
                 onClick={() => toggleMenu("recrutement")}
                 className={dropdownButton}
               >
-                👥
                 <span>Recrutement</span>
-
-                <span
-                  className={`text-xs transition-transform duration-200 ${
-                    activeMenu === "recrutement"
-                      ? "rotate-180"
-                      : ""
-                  }`}
-                >
-                  ▼
-                </span>
               </button>
 
               {activeMenu === "recrutement" && (
@@ -469,18 +404,13 @@ const Navbar = () => {
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        gap-3
+                        block
                         px-5
                         py-4
                         hover:bg-blue-50
                         transition
                       "
                     >
-                      <span className="text-xl">
-                        {item.icon}
-                      </span>
-
                       <div>
                         <p className="font-semibold text-gray-800">
                           {item.title}
@@ -496,30 +426,17 @@ const Navbar = () => {
               )}
             </div>
 
-
             {/* ===============================
                 MON ESPACE
             =============================== */}
 
             {token && (
               <div className="relative">
-
                 <button
                   onClick={() => toggleMenu("espace")}
                   className={dropdownButton}
                 >
-                  👤
                   <span>Mon espace</span>
-
-                  <span
-                    className={`text-xs transition-transform duration-200 ${
-                      activeMenu === "espace"
-                        ? "rotate-180"
-                        : ""
-                    }`}
-                  >
-                    ▼
-                  </span>
                 </button>
 
                 {activeMenu === "espace" && (
@@ -538,9 +455,7 @@ const Navbar = () => {
                       overflow-hidden
                     "
                   >
-
                     <div className="px-5 py-4 bg-gray-50 border-b">
-
                       <p className="text-xs text-gray-500">
                         Connecté en tant que
                       </p>
@@ -558,44 +473,31 @@ const Navbar = () => {
                           {user.role}
                         </p>
                       )}
-
                     </div>
-
 
                     <Link
                       to="/profil"
                       onClick={closeMenus}
                       className="
-                        flex
-                        items-center
-                        gap-3
+                        block
                         px-5
                         py-4
                         hover:bg-blue-50
                         transition
                       "
                     >
-                      <span className="text-xl">
-                        👤
-                      </span>
+                      <p className="font-semibold text-gray-800">
+                        Mon profil
+                      </p>
 
-                      <div>
-                        <p className="font-semibold text-gray-800">
-                          Mon profil
-                        </p>
-
-                        <p className="text-xs text-gray-500">
-                          Consulter et modifier mon profil
-                        </p>
-                      </div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        Consulter et modifier mon profil
+                      </p>
                     </Link>
-
                   </div>
                 )}
-
               </div>
             )}
-
 
             {/* ===============================
                 DÉCONNEXION
@@ -623,7 +525,6 @@ const Navbar = () => {
                 Déconnexion
               </button>
             )}
-
 
             {/* ===============================
                 NON CONNECTÉ
@@ -667,9 +568,7 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-
           </div>
-
 
           {/* ===============================
               BOUTON MOBILE
@@ -682,24 +581,19 @@ const Navbar = () => {
             }}
             className="
               md:hidden
-              w-11
-              h-11
+              px-4
+              py-2
               rounded-xl
               bg-blue-500
               hover:bg-blue-400
-              flex
-              items-center
-              justify-center
-              text-2xl
+              font-semibold
               transition
             "
             aria-label="Menu"
           >
-            {menuOpen ? "✕" : "☰"}
+            {menuOpen ? "Fermer" : "Menu"}
           </button>
-
         </div>
-
 
         {/* ===============================
             MENU MOBILE
@@ -714,7 +608,6 @@ const Navbar = () => {
               py-4
             "
           >
-
             <div className="flex flex-col gap-2">
 
               {/* ACCUEIL */}
@@ -724,12 +617,10 @@ const Navbar = () => {
                 onClick={closeMenus}
                 className={navLink}
               >
-                🏠
                 <span>Accueil</span>
               </Link>
 
-
-              {/* DASHBOARD ADMIN MOBILE */}
+              {/* DASHBOARD ADMIN */}
 
               {user?.role === "admin" && (
                 <Link
@@ -738,7 +629,6 @@ const Navbar = () => {
                   className="
                     flex
                     items-center
-                    gap-2
                     px-4
                     py-3
                     rounded-xl
@@ -751,11 +641,9 @@ const Navbar = () => {
                     transition
                   "
                 >
-                  🛡️
                   <span>Dashboard Admin</span>
                 </Link>
               )}
-
 
               {/* EMPLOI */}
 
@@ -774,27 +662,24 @@ const Navbar = () => {
                   transition
                 "
               >
-                <span className="flex items-center gap-2">
-                  🔎 Emploi
-                </span>
+                <span>Emploi</span>
 
-                <span>
-                  {activeMenu === "emploi" ? "▲" : "▼"}
+                <span className="text-sm">
+                  {activeMenu === "emploi"
+                    ? "Fermer"
+                    : "Ouvrir"}
                 </span>
               </button>
 
               {activeMenu === "emploi" && (
                 <div className="ml-4 border-l-2 border-blue-400 pl-3">
-
                   {dropdownLinks.emploi.map((item) => (
                     <Link
                       key={item.to}
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        items-center
-                        gap-3
+                        block
                         px-4
                         py-3
                         rounded-lg
@@ -802,14 +687,11 @@ const Navbar = () => {
                         transition
                       "
                     >
-                      <span>{item.icon}</span>
                       <span>{item.title}</span>
                     </Link>
                   ))}
-
                 </div>
               )}
-
 
               {/* CANDIDATURES */}
 
@@ -828,29 +710,24 @@ const Navbar = () => {
                   transition
                 "
               >
-                <span className="flex items-center gap-2">
-                  📋 Candidatures
-                </span>
+                <span>Candidatures</span>
 
-                <span>
+                <span className="text-sm">
                   {activeMenu === "candidatures"
-                    ? "▲"
-                    : "▼"}
+                    ? "Fermer"
+                    : "Ouvrir"}
                 </span>
               </button>
 
               {activeMenu === "candidatures" && (
                 <div className="ml-4 border-l-2 border-blue-400 pl-3">
-
                   {dropdownLinks.candidatures.map((item) => (
                     <Link
                       key={item.to}
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        items-center
-                        gap-3
+                        block
                         px-4
                         py-3
                         rounded-lg
@@ -858,14 +735,11 @@ const Navbar = () => {
                         transition
                       "
                     >
-                      <span>{item.icon}</span>
                       <span>{item.title}</span>
                     </Link>
                   ))}
-
                 </div>
               )}
-
 
               {/* RECRUTEMENT */}
 
@@ -884,29 +758,24 @@ const Navbar = () => {
                   transition
                 "
               >
-                <span className="flex items-center gap-2">
-                  👥 Recrutement
-                </span>
+                <span>Recrutement</span>
 
-                <span>
+                <span className="text-sm">
                   {activeMenu === "recrutement"
-                    ? "▲"
-                    : "▼"}
+                    ? "Fermer"
+                    : "Ouvrir"}
                 </span>
               </button>
 
               {activeMenu === "recrutement" && (
                 <div className="ml-4 border-l-2 border-blue-400 pl-3">
-
                   {dropdownLinks.recrutement.map((item) => (
                     <Link
                       key={item.to}
                       to={item.to}
                       onClick={closeMenus}
                       className="
-                        flex
-                        items-center
-                        gap-3
+                        block
                         px-4
                         py-3
                         rounded-lg
@@ -914,14 +783,11 @@ const Navbar = () => {
                         transition
                       "
                     >
-                      <span>{item.icon}</span>
                       <span>{item.title}</span>
                     </Link>
                   ))}
-
                 </div>
               )}
-
 
               {/* MON ESPACE */}
 
@@ -942,27 +808,22 @@ const Navbar = () => {
                       transition
                     "
                   >
-                    <span className="flex items-center gap-2">
-                      👤 Mon espace
-                    </span>
+                    <span>Mon espace</span>
 
-                    <span>
+                    <span className="text-sm">
                       {activeMenu === "espace"
-                        ? "▲"
-                        : "▼"}
+                        ? "Fermer"
+                        : "Ouvrir"}
                     </span>
                   </button>
 
                   {activeMenu === "espace" && (
                     <div className="ml-4 border-l-2 border-blue-400 pl-3">
-
                       <Link
                         to="/profil"
                         onClick={closeMenus}
                         className="
-                          flex
-                          items-center
-                          gap-3
+                          block
                           px-4
                           py-3
                           rounded-lg
@@ -970,15 +831,12 @@ const Navbar = () => {
                           transition
                         "
                       >
-                        👤
                         <span>Mon profil</span>
                       </Link>
-
                     </div>
                   )}
                 </>
               )}
-
 
               {/* DÉCONNEXION */}
 
@@ -999,16 +857,14 @@ const Navbar = () => {
                     transition
                   "
                 >
-                  🚪 Déconnexion
+                  Déconnexion
                 </button>
               )}
-
 
               {/* CONNEXION / INSCRIPTION */}
 
               {!token && (
                 <div className="flex flex-col gap-2 mt-2">
-
                   <Link
                     to="/login"
                     onClick={closeMenus}
@@ -1041,18 +897,14 @@ const Navbar = () => {
                   >
                     Inscription
                   </Link>
-
                 </div>
               )}
-
             </div>
           </div>
         )}
-
       </div>
     </nav>
   );
 };
 
 export default Navbar;
-
