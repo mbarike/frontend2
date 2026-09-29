@@ -403,26 +403,26 @@ const getFileUrl = (fileUrl) => {
               </p>
 
 
-              <span className="
-                inline-flex
-                items-center
-                mt-4
-                px-4
-                py-2
-                bg-white
-                text-blue-700
-                rounded-full
-                font-bold
-                text-sm
-                shadow-sm
-              ">
-
-                {role === "candidat"
-                  ? "👨‍💻 Candidat"
-                  : "💼 Recruteur"
-                }
-
-              </span>
+             <span className="
+  inline-flex
+  items-center
+  mt-4
+  px-4
+  py-2
+  bg-white
+  text-blue-700
+  rounded-full
+  font-bold
+  text-sm
+  shadow-sm
+">
+  {role === "candidat"
+    ? "👨‍💻 Candidat"
+    : role === "recruteur"
+    ? "💼 Recruteur"
+    : "🛡️ Administrateur"
+  }
+</span>
 
             </div>
 
@@ -1033,62 +1033,71 @@ setPhoto(getFileUrl(photoUrl));
     ">
 
       <div className="
-        w-11
-        h-11
-        bg-white
-        rounded-xl
-        flex
-        items-center
-        justify-center
-        text-xl
-        shadow-sm
-      ">
-        {role === "candidat" ? "👨‍💻" : "💼"}
-      </div>
+  w-11
+  h-11
+  bg-white
+  rounded-xl
+  flex
+  items-center
+  justify-center
+  text-xl
+  shadow-sm
+">
+  {role === "candidat"
+    ? "👨‍💻"
+    : role === "recruteur"
+    ? "💼"
+    : "🛡️"
+  }
+</div>
 
-      <div>
+<div>
 
-        <p className="
-          text-xs
-          text-gray-400
-          font-medium
-          uppercase
-          tracking-wide
-        ">
-          Votre rôle
-        </p>
+  <p className="
+    text-xs
+    text-gray-400
+    font-medium
+    uppercase
+    tracking-wide
+  ">
+    Votre rôle
+  </p>
 
-        <p className="
-          text-lg
-          font-bold
-          text-gray-800
-          mt-1
-        ">
-          {role === "candidat"
-            ? "Candidat"
-            : "Recruteur"
-          }
-        </p>
+  <p className="
+    text-lg
+    font-bold
+    text-gray-800
+    mt-1
+  ">
+    {role === "candidat"
+      ? "Candidat"
+      : role === "recruteur"
+      ? "Recruteur"
+      : "Administrateur"
+    }
+  </p>
 
-      </div>
+</div>
 
     </div>
 
 
-    <span className="
-      px-4
-      py-2
-      bg-blue-100
-      text-blue-700
-      rounded-full
-      text-sm
-      font-semibold
-    ">
-      {role === "candidat"
-        ? "👨‍💻 Candidat"
-        : "💼 Recruteur"
-      }
-    </span>
+   <span className="
+  px-4
+  py-2
+  bg-blue-100
+  text-blue-700
+  rounded-full
+  text-sm
+  font-semibold
+">
+  {role === "candidat"
+    ? "👨‍💻 Candidat"
+    : role === "recruteur"
+    ? "💼 Recruteur"
+    : "🛡️ Administrateur"
+  }
+</span>
 
   </div>
 
