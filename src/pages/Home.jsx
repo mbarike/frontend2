@@ -501,156 +501,60 @@ const Home = () => {
       {/* HERO */}
       {/* ================================================== */}
 
-      <section className="relative text-white overflow-hidden bg-blue-900">
+{/* ================================================== */}
+{/* HERO */}
+{/* ================================================== */}
 
-        <div
-          className="
-            absolute
-            inset-0
-            bg-cover
-            bg-[center_25%]
-            bg-no-repeat
-          "
-          style={{
-            backgroundImage: "url('/hero-job.jpg')",
-          }}
-        ></div>
+<section className="relative text-white overflow-hidden bg-blue-900">
 
-        <div className="absolute inset-0 bg-slate-950/65"></div>
+ <div
+  className="absolute inset-0 bg-cover bg-no-repeat"
+  style={{
+    backgroundImage: "url('/hero-job.jpg')",
+    backgroundPosition: "center 30%",
+    backgroundSize: "100% auto",
+    backgroundColor: "#102D59",
+  }}
+></div>
 
-        <div
-          className="
-            relative
-            max-w-7xl
-            mx-auto
-            px-4
-            sm:px-6
-            lg:px-8
-            py-16
-            md:py-20
-          "
+  <div className="absolute inset-0 bg-slate-950/65"></div>
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+
+    <div className="text-center flex flex-col items-center">
+
+      
+
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight">
+        Bienvenue sur <span className="text-blue-300">JobConnect</span>
+      </h1>
+
+      <h2 className="mt-5 text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+        Trouvez votre prochain emploi
+      </h2>
+
+      <div className="mt-9 flex flex-col sm:flex-row gap-4 justify-center">
+
+        <a
+          href="#offres"
+          className="inline-flex items-center justify-center px-7 py-4 rounded-xl bg-white text-blue-700 font-bold hover:bg-blue-50 transition shadow-lg"
         >
-          <div
-            className="
-              grid
-              grid-cols-1
-              lg:grid-cols-2
-              gap-10
-              lg:gap-16
-              items-center
-            "
-          >
+          Consulter les offres
+        </a>
 
-            <div className="text-center lg:text-left">
+        <Link
+          to="/register"
+          className="inline-flex items-center justify-center px-7 py-4 rounded-xl border border-white text-white font-bold hover:bg-white hover:text-blue-700 transition"
+        >
+          Créer un compte
+        </Link>
 
-              <p
-                className="
-                  text-sm
-                  sm:text-base
-                  font-semibold
-                  text-blue-100
-                  mb-5
-                "
-              >
-                Plateforme de mise en relation professionnelle
-              </p>
+      </div>
 
-              <h1
-                className="
-                  text-4xl
-                  sm:text-5xl
-                  md:text-6xl
-                  font-extrabold
-                  leading-tight
-                  tracking-tight
-                "
-              >
-                Trouvez votre
-                <br />
-                <span className="text-white">
-                  prochain emploi
-                </span>
-              </h1>
+    </div>
 
-              <p
-                className="
-                  mt-6
-                  text-base
-                  sm:text-lg
-                  text-blue-100
-                  max-w-xl
-                  mx-auto
-                  lg:mx-0
-                  leading-relaxed
-                "
-              >
-                JobConnect met en relation les candidats
-                à la recherche d'une opportunité et les
-                recruteurs à la recherche de nouveaux profils.
-              </p>
-
-              <div
-                className="
-                  mt-8
-                  flex
-                  flex-col
-                  sm:flex-row
-                  gap-3
-                  justify-center
-                  lg:justify-start
-                "
-              >
-
-                <a
-                  href="#offres"
-                  className="
-                    inline-flex
-                    items-center
-                    justify-center
-                    px-6
-                    py-3.5
-                    rounded-xl
-                    bg-white
-                    text-blue-700
-                    font-bold
-                    hover:bg-blue-50
-                    transition
-                    shadow-lg
-                  "
-                >
-                  Consulter les offres
-                </a>
-
-                <Link
-                  to="/register"
-                  className="
-                    inline-flex
-                    items-center
-                    justify-center
-                    px-6
-                    py-3.5
-                    rounded-xl
-                    border
-                    border-white
-                    text-white
-                    font-bold
-                    hover:bg-white
-                    hover:text-blue-700
-                    transition
-                  "
-                >
-                  Créer un compte
-                </Link>
-
-              </div>
-
-            </div>
-
-            <div className="hidden lg:block"></div>
-
-          </div>
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* ================================================== */}
       {/* RECHERCHE */}

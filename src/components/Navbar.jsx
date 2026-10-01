@@ -139,45 +139,24 @@ const Navbar = () => {
           CONTAINER PRINCIPAL
       =============================== */}
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="w-full">
         <div className="h-[76px] flex items-center justify-between gap-4">
 
           {/* ===============================
               LOGO
           =============================== */}
 
-          <Link
-            to="/"
-            onClick={closeMenus}
-            className="flex items-center gap-3 shrink-0"
-          >
-            <div
-              className="
-                w-11
-                h-11
-                rounded-xl
-                bg-white
-                flex
-                items-center
-                justify-center
-                shadow-md
-              "
-            >
-              <span className="text-blue-600 font-bold text-lg">
-                JC
-              </span>
-            </div>
-
-            <div className="hidden sm:block">
-              <div className="text-xl lg:text-2xl font-bold leading-none">
-                JobConnect
-              </div>
-
-              <div className="text-xs text-blue-100 mt-1">
-                Votre avenir professionnel
-              </div>
-            </div>
-          </Link>
+ <Link
+  to="/"
+  onClick={closeMenus}
+  className="flex items-center shrink-0 h-full"
+>
+  <img
+    src="/logo-jobconnect.png"
+    alt="JobConnect"
+    className="h-[68px] w-auto object-contain"
+  />
+</Link>
 
           {/* ===============================
               MENU DESKTOP
